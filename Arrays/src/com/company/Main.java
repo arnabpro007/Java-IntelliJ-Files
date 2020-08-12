@@ -1,14 +1,71 @@
 package com.company;
 
+import java.util.Scanner;
+
 public class Main {
-
+    private static Scanner scanner = new Scanner(System.in);
+    private static GroceryList groceryList = new GroceryList();
     public static void main(String[] args) {
-	// write your code here
-       int[] myintArray = {1,2,3,4,5,6,7,8,9,10};
-       //myintArray[5] = 50;
-       System.out.println(myintArray[5]);
-       printArray(myintArray);
 
+    boolean quit = false;
+    int choice = 0;
+    printInstructions();
+    while(quit == false){
+        System.out.println("Enter your choice: ");
+        choice = scanner.nextInt();
+        scanner.nextLine();
+        switch (choice){
+            case 0:
+                printInstructions();
+                break;
+            case 1:
+                groceryList.printGrocerylist();
+                break;
+            case 2:
+                System.out.println("Enter the item you want to add: ");
+                String item = scanner.nextLine();
+                groceryList.addGroceryItem(item);
+                break;
+            case 3:
+                System.out.println("Enter the position you want to modify: ");
+                int position = scanner.nextInt();
+                System.out.println("Enter the new item: ");
+                scanner.nextLine();
+                String newItem = scanner.nextLine();
+                groceryList.modifyGroceryItem(position,newItem);
+                break;
+            case 4:
+                System.out.println("Enter the position of the item you want to remove: ");
+                position = scanner.nextInt();
+                groceryList.removeGroceryItem(position);
+                break;
+            case 5:
+                System.out.println("Enter the item you want to search: ");
+                item = scanner.nextLine();
+                System.out.println(groceryList.findItem(item));
+                break;
+            case 6:
+                quit = true;
+                break;
+
+
+        }
+    }
+
+
+
+    }
+
+    public static void printInstructions(){
+        System.out.println("Press: ");
+        System.out.println("0 - to print choice options.");
+        System.out.println("1 - to print all the items");
+        System.out.println("2 - to add a new item.");
+        System.out.println("3 - to modify a position");
+
+        System.out.println("4 - to remove an item from a particular position");
+        System.out.println("5 - to search for an item in the list.");
+        System.out.println("6 - to quit application.");
     }
     public static void printArray(int[] array){
         for (int i = 0; i < array.length; i++) {
