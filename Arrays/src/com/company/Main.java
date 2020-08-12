@@ -27,17 +27,16 @@ public class Main {
                 groceryList.addGroceryItem(item);
                 break;
             case 3:
-                System.out.println("Enter the position you want to modify: ");
-                int position = scanner.nextInt();
+                System.out.println("Enter the item you want to modify: ");
+                String oldItem = scanner.nextLine();
                 System.out.println("Enter the new item: ");
-                scanner.nextLine();
                 String newItem = scanner.nextLine();
-                groceryList.modifyGroceryItem(position,newItem);
+                groceryList.modifyGroceryItem(newItem,oldItem);
                 break;
             case 4:
-                System.out.println("Enter the position of the item you want to remove: ");
-                position = scanner.nextInt();
-                groceryList.removeGroceryItem(position);
+                System.out.println("Enter the item you want to remove: ");
+                item = scanner.nextLine();
+                groceryList.removeGroceryItem(item);
                 break;
             case 5:
                 System.out.println("Enter the item you want to search: ");
