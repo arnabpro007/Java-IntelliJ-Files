@@ -5,13 +5,11 @@ import java.util.Scanner;
 
 public class Main {
     private static Scanner scanner = new Scanner(System.in);
-    public static MobilePhone myMobile = new MobilePhone();
+    public static MobilePhone myMobile = new MobilePhone("7278107091");
     public static void main(String[] args) {
 	// write your code here
-        Contacts temp = new Contacts("Arnab","1000");
-        myMobile.getContactList().set(0,temp);
-        System.out.println(myMobile.getContactList().indexOf(temp));
-        /*boolean Assess = false;
+
+        boolean Assess = false;
         printList();
         int count = 0;
         //scanner.nextLine();
@@ -40,18 +38,19 @@ public class Main {
                 case 6:
                     Assess = true;
             }
-        }*/
+        }
 
     }
 
     private static void FindAContact(){
         System.out.println("Enter the name of the contact you want to search");
-        //scanner.nextLine();
+
         String name = scanner.nextLine();
         System.out.println("Enter contact number: ");
-        //scanner.nextLine();
+
         String number = scanner.nextLine();
-        myMobile.findContact(name,number);
+        Contacts contact = Contacts.createContact(name,number);
+        myMobile.queryContact(contact);
 
     }
 
@@ -59,47 +58,28 @@ public class Main {
         System.out.println("Enter the name of the contact you want to remove: ");
         scanner.nextLine();
         String name = scanner.nextLine();
-        /*System.out.println("Enter contact number: ");
-        //scanner.nextLine();*/
-        //String number = scanner.nextLine();
-        //myMobile.removeContact(name,number);
-        String[] contactNumber = myMobile.PhoneArray();
-        int position = findIndex(contactNumber,name);
-        myMobile.getContactList().remove(position);
+        String number = scanner.nextLine();
+        Contacts contactNew = Contacts.createContact(name,number);
+        myMobile.removeContact(contactNew);
 
     }
-    public static int findIndex(String[] arr, String t)
-    {
-        if(arr.length == 0){
-            return -1;
-        }else{
-            int j = 0;
-            while(j<arr.length){
-                if (arr[j].equals(t)){
-                    return j;
-                }else{
-                    j ++;
-                }
-            }
-            return -1;
-        }
 
-    }
     private static void ModifyContact(){
         System.out.println("Enter the name of the contact you want to modify: ");
         scanner.nextLine();
         String nameOld = scanner.nextLine();
-        String[] array = myMobile.NameArray();
-        int position = findIndex(array,nameOld);
+        System.out.println("Enter contact number: ");
+        String numberOld = scanner.nextLine();
+        Contacts contact = Contacts.createContact(nameOld,numberOld);
         System.out.println("Enter the new contact name: ");
-        //scanner.nextLine();
+
         String name = scanner.nextLine();
         System.out.println("Enter contact number: ");
-        //scanner.nextLine();
+
         String number = scanner.nextLine();
-        Contacts tempContact = new Contacts(name,number);
-        myMobile.getContactList().set(position,tempContact);
-        //myMobile.modifyContact(oldContact, name,number);
+        Contacts contactNew = Contacts.createContact(name,number);
+        myMobile.updateContact(contact,contactNew);
+
     }
 
     private static void AddNewContact(){
@@ -107,9 +87,10 @@ public class Main {
         scanner.nextLine();
         String name = scanner.nextLine();
         System.out.println("Enter contact number: ");
-        //scanner.nextLine();
+
         String number = scanner.nextLine();
-        myMobile.StoreContact(name,number);
+        Contacts contact = Contacts.createContact(name,number);
+        myMobile.StoreContact(contact);
     }
 
     private static void printContactList(){
